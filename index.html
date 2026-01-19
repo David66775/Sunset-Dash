@@ -11,6 +11,9 @@
         width: 99.9vw;
         height: 99.3vh;
       }
+      body {
+        background-color: black;
+      }
       canvas {
         z-index: 0;
         object-fit: cover;
@@ -27,7 +30,7 @@
       const baseY = 135;
       const gameLength = 1000;
       let playerY = 125;
-      let playerX = 3;
+      let playerX = 25;
       let velocityY = 0;
       let score = 0;
       let inAir = false;
@@ -37,6 +40,8 @@
       let obstacleX4 = 240;
       let obstacleX5 = 300;
       let obstacleX6 = 360;
+      let gameover = false;
+      let textX = 25;
       const garvity = window.setInterval(gravity, 7);
       const interval = window.setInterval(gameloop, 5);
       const runner = window.setInterval(run, 4);
@@ -44,6 +49,8 @@
       let clicked = false;
       let current = 0;
       let latest = 0;
+      let acelerationfactor = 0.2;
+      let speed = 0.4;
       function gameloop() {
         ctx.beginPath();
         ctx.clearRect(0, 0, document.getElementById("a").width, document.getElementById("a").height);
@@ -56,7 +63,7 @@
         ctx.lineTo(playerX, playerY - 4);
         ctx.lineTo(playerX, playerY);
         ctx.font = "15px monospace";
-        ctx.fillText(`${score}`, 2, 20);
+        ctx.fillText(`Score: ${score}`, textX, 20);
         
         ctx.moveTo(-10, 136);
         ctx.lineTo(1000, 136);
@@ -92,6 +99,47 @@
         ctx.lineTo(1000, 142);
         ctx.moveTo(-10, 142);
         ctx.lineTo(1000, 142);
+        
+        ctx.moveTo(-10, 143);
+        ctx.lineTo(1000, 143);
+        ctx.moveTo(-10, 143);
+        ctx.lineTo(1000, 143);
+        
+        ctx.moveTo(-10, 144);
+        ctx.lineTo(1000, 144);
+        ctx.moveTo(-10, 144);
+        ctx.lineTo(1000, 144);
+        
+        ctx.moveTo(-10, 145);
+        ctx.lineTo(1000, 145);
+        ctx.moveTo(-10, 145);
+        ctx.lineTo(1000, 145);
+        
+        
+        ctx.moveTo(-10, 146);
+        ctx.lineTo(1000, 146);
+        ctx.moveTo(-10, 146);
+        ctx.lineTo(1000, 146);
+        
+        ctx.moveTo(-10, 147);
+        ctx.lineTo(1000, 147);
+        ctx.moveTo(-10, 147);
+        ctx.lineTo(1000, 147);
+        
+        ctx.moveTo(-10, 148);
+        ctx.lineTo(1000, 148);
+        ctx.moveTo(-10, 148);
+        ctx.lineTo(1000, 148);
+        
+        ctx.moveTo(-10, 149);
+        ctx.lineTo(1000, 149);
+        ctx.moveTo(-10, 149);
+        ctx.lineTo(1000, 149);
+        
+        ctx.moveTo(-10, 150);
+        ctx.lineTo(1000, 150);
+        ctx.moveTo(-10, 150);
+        ctx.lineTo(1000, 150);
         
         ctx.moveTo(obstacleX, 135);
         ctx.lineTo(obstacleX, 120);
@@ -156,7 +204,7 @@
         ctx.lineTo(playerX, playerY - 4);
         ctx.lineTo(playerX, playerY);
         ctx.font = "15px monospace";
-        ctx.fillText(`${score}`, 2, 20);
+        ctx.fillText(`Score: ${score}`, textX, 20);
         ctx.moveTo(obstacleX, 135);
         ctx.lineTo(obstacleX, 120);
         ctx.moveTo(obstacleX, 130);
@@ -215,47 +263,51 @@
         
       }
       function run() {
-        obstacleX -= 0.2;
-        obstacleX2 -= 0.2;
-        obstacleX3 -= 0.2;
-        obstacleX4 -= 0.2;
-        obstacleX5 -= 0.2;
-        obstacleX6 -= 0.2;
-        if ((obstacleX + 3) >= (playerX - 4) && (obstacleX - 3) <= (playerX + 4) && playerY > 121) {
-          restart();
+        if (playerY > 133) {
+          playerY = 133;
         }
-        if ((obstacleX2 + 3) >= (playerX - 4) && (obstacleX2 - 3) <= (playerX + 4) && playerY > 121) {
-          restart();
+        obstacleX -= speed;
+        obstacleX2 -= speed;
+        obstacleX3 -= speed;
+        obstacleX4 -= speed;
+        obstacleX5 -= speed;
+        obstacleX6 -= speed;
+        if (!gameover) {
+          if ((obstacleX + 3) >= (playerX - 4) && (obstacleX - 3) <= (playerX + 4) && playerY > 121) {
+            restart();
+           }
+          if ((obstacleX2 + 3) >= (playerX - 4) && (obstacleX2 - 3) <= (playerX + 4) && playerY > 121) {
+            restart();
+          }
+          if ((obstacleX3 + 3) >= (playerX - 4) && (obstacleX3 - 3) <= (playerX + 4) && playerY > 121) {
+            restart();
+          }
+          if ((obstacleX4 + 3) >= (playerX - 4) && (obstacleX4 - 3) <= (playerX + 4) && playerY > 121) {
+            restart();
+          }
+          if ((obstacleX5 + 3) >= (playerX - 4) && (obstacleX5 - 3) <= (playerX + 4) && playerY > 121) {
+            restart();
+          }
+          if ((obstacleX6 + 3) >= (playerX - 4) && (obstacleX6 - 3) <= (playerX + 4) && playerY > 121) {
+            restart();
+          }
         }
-        if ((obstacleX3 + 3) >= (playerX - 4) && (obstacleX3 - 3) <= (playerX + 4) && playerY > 121) {
-          restart();
-        }
-        if ((obstacleX4 + 3) >= (playerX - 4) && (obstacleX4 - 3) <= (playerX + 4) && playerY > 121) {
-          restart();
-        }
-        if ((obstacleX5 + 3) >= (playerX - 4) && (obstacleX5 - 3) <= (playerX + 4) && playerY > 121) {
-          restart();
-        }
-        if ((obstacleX6 + 3) >= (playerX - 4) && (obstacleX6 - 3) <= (playerX + 4) && playerY > 121) {
-          restart();
-        }
-        
-        if (obstacleX < 0) {
+        if (obstacleX < -4) {
           obstacleX = obstacleX6 + 55;
         }
-        if (obstacleX2 < 0) {
+        if (obstacleX2 < -4) {
           obstacleX2 = obstacleX + 70;
         }
-        if (obstacleX3 < 0) {
+        if (obstacleX3 < -4) {
           obstacleX3 = obstacleX2 + 50;
         }
-        if (obstacleX4 < 0) {
+        if (obstacleX4 < -4) {
           obstacleX4 = obstacleX3 + 60;
         }
-        if (obstacleX5 < 0) {
+        if (obstacleX5 < -4) {
           obstacleX5 = obstacleX4 + 65;
         }
-        if (obstacleX6 < 0) {
+        if (obstacleX6 < -4) {
           obstacleX6 = obstacleX5 + 70;
         }
         
@@ -265,7 +317,15 @@
           playerY += 0.5;
         }
       }
+      function overalert() {
+        alert("Game Over, click screen to restart.");
+      }
       function restart() {
+        
+        ctx.lineWidth = 4000;
+        gameover = true;
+        
+        console.error("Skill Issue");
         score = 0;
         obstacleX = 80;
         obstacleX2 = 135;
@@ -273,15 +333,32 @@
         obstacleX4 = 240;
         obstacleX5 = 300;
         obstacleX6 = 360;
+        setTimeout(overalert, 100);
       }
       function setAir() {
         inAir = false;
       }
+      document.addEventListener('click', (event) => {
+        if (gameover) {
+          score = 0;
+          obstacleX = 80;
+          obstacleX2 = 135;
+          obstacleX3 = 190;
+          obstacleX4 = 240;
+          obstacleX5 = 300;
+          ctx.lineWidth = 1;
+          obstacleX6 = 360;
+          gameover = false;
+        }
+      });
+      
       document.addEventListener('keydown', (event) => {
         if (event.key === " " && inAir !== true) {
           inAir = true;
-          playerY -= 40;
-          setTimeout(setAir, 600);
+          //\
+            playerY -= 40;
+          //\
+          setTimeout(setAir, 700);
         }
       });
       function check() {
